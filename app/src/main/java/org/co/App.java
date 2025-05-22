@@ -3,23 +3,43 @@
  */
 package org.co;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-import org.co.components.dave_buttons;
+import org.co.components.base_buttons;
+import org.co.components.dave_textfield;
 
 public class App extends JFrame {
     private final JLabel label_title;
+    private final JButton btn_calc;
+    private final base_buttons btns_input_base, btns_output_base;
+    private final dave_textfield txt_input, txt_output;
+    private final JPanel panel = new JPanel();
 
     public App() {
-        setPreferredSize(new Dimension(400, 500));
         setVisible(true);
+        setPreferredSize(new Dimension(400, 500));
+        txt_input = new dave_textfield("Number to be Converted: ");
+        txt_output = new dave_textfield("Converted Number: ");
         label_title = new JLabel("Base Converter");
-        var btns = new dave_buttons();
-        add(label_title);
-        add(btns);
+        label_title.setFont(new Font("title_font", Font.BOLD, 24));
+        label_title.setForeground(Color.red);
+        btns_input_base = new base_buttons("Input Number Base");
+        btns_output_base = new base_buttons("Output Number Base");
+        btn_calc = new JButton("Calculate");
+        panel.add(label_title);
+        panel.add(txt_input);
+        panel.add(btns_input_base);
+        panel.add(btns_output_base);
+        panel.add(btn_calc);
+        panel.add(txt_output);
+        add(panel);
         pack();
     }
 

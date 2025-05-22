@@ -1,15 +1,17 @@
 package org.co.components;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.border.LineBorder;
 
-public class dave_buttons extends JPanel {
+public class base_buttons extends JPanel {
     public static enum base {
         binary, teriary, octal, decimal;
     }
@@ -18,9 +20,12 @@ public class dave_buttons extends JPanel {
     private final JRadioButton rbtn_binary, rbtn_teriary, rbtn_octal, rbtn_decimal;
     private  ActionListener listener;
     public base selected_base = base.binary;
-
-    public dave_buttons() {
-        setBorder(new LineBorder(Color.gray, 10));
+    
+    public base_buttons(String title) {
+        var border = BorderFactory.createTitledBorder(new LineBorder(Color.gray, 2), title); 
+        border.setTitleColor(Color.blue);
+        border.setTitleFont(new Font("dave_font", Font.BOLD, 12));
+        setBorder(border);
         rbtn_binary = new JRadioButton("Binary");
         rbtn_teriary = new JRadioButton("Teriary");
         rbtn_octal = new JRadioButton("Octal");
