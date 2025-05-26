@@ -18,7 +18,7 @@ import org.co.utils.base_conversion.base;
  */
 public class base_buttons extends JPanel {
     private final ButtonGroup group = new ButtonGroup();
-    private final JRadioButton rbtn_binary, rbtn_ternary, rbtn_octal, rbtn_decimal;
+    private final JRadioButton rbtn_binary, rbtn_ternary, rbtn_octal, rbtn_decimal, rbtn_hexadecimal;
     private  ActionListener listener;
     public base selected_base = base.binary;
     
@@ -35,14 +35,17 @@ public class base_buttons extends JPanel {
         rbtn_ternary = new JRadioButton("Ternary");
         rbtn_octal = new JRadioButton("Octal");
         rbtn_decimal = new JRadioButton("Decimal");
+        rbtn_hexadecimal = new JRadioButton("Hexadecimal");
         group.add(rbtn_binary);
         group.add(rbtn_ternary);
         group.add(rbtn_octal);
         group.add(rbtn_decimal);
+        group.add(rbtn_hexadecimal);
         add(rbtn_binary);
         add(rbtn_ternary);
         add(rbtn_octal);
         add(rbtn_decimal);
+        add(rbtn_hexadecimal);
         add_listener();
     }
 
@@ -57,6 +60,7 @@ public class base_buttons extends JPanel {
             if (btn == rbtn_ternary) selected_base = base.ternary;
             if (btn == rbtn_octal) selected_base = base.octal;
             if (btn == rbtn_decimal) selected_base = base.decimal;
+            if (btn == rbtn_hexadecimal) selected_base = base.hexadecimal;
         };
         var btns = group.getElements();
         while (btns.hasMoreElements()) {

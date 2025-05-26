@@ -21,11 +21,14 @@ public class dave_textfield extends JPanel {
     private final JTextField text;
     private int value = 0;
 
+    private final boolean is_output_text;
+
     /**
      * initializes components and do basic setups
      * @param label_text label name of the textfield
      */
-    public dave_textfield(String label_text) {
+    public dave_textfield(String label_text, boolean is_output_text) {
+        this.is_output_text = is_output_text;
         setPreferredSize(new Dimension(400, 100));
         setLayout(new GridBagLayout());
         text = new JTextField();
@@ -92,9 +95,10 @@ public class dave_textfield extends JPanel {
             try {
                 String txt = e.getDocument().getText(0, e.getDocument().getLength());
                 if (txt.isEmpty()) return;
+                if (is_output_text) return;
                 for (Character c : txt.toCharArray()) {
                     if (!Character.isDigit(c)) {
-                        System.err.println("only digits are allowed");
+                        System.err.println("only numbers are allowed");
                     }
                 }    
                 value = Integer.parseInt(txt); 

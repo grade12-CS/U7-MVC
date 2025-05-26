@@ -33,8 +33,8 @@ public class App extends JFrame {
     public App() {
         setVisible(true);
         setPreferredSize(new Dimension(400, 500));
-        txt_input = new dave_textfield("Number to be Converted: ");
-        txt_output = new dave_textfield("Converted Number: ");
+        txt_input = new dave_textfield("Number to be Converted: ", false);
+        txt_output = new dave_textfield("Converted Number: ", true);
         label_title = new JLabel("Base Converter");
         label_title.setFont(new Font("title_font", Font.BOLD, 24));
         label_title.setForeground(Color.red);
@@ -78,6 +78,10 @@ public class App extends JFrame {
         return "App build is successful.";
     }
 
+    /**
+     * starts program
+     * @param args arguments in terminal
+     */
     public static void main(String[] args) {
         var app = new App();
         System.out.println(app.getGreeting());

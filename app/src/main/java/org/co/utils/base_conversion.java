@@ -8,7 +8,7 @@ public class base_conversion {
      * types of base
      */
     public static enum base {
-        binary(2), ternary(3), octal(8), decimal(10);
+        binary(2), ternary(3), octal(8), decimal(10), hexadecimal(16);
         public final int value;
         private base(int value) {
             this.value = value;
@@ -27,14 +27,18 @@ public class base_conversion {
             return Integer.toString(input);
         } 
         if (input == 0) return "0"; 
-        StringBuilder b = new StringBuilder();
         int decimal = convert_to_decimal(input, input_base);
-        while (decimal > 0) {
-            int bit = decimal % output_base.value;
-            b.append((char) ('0' + bit));
-            decimal /= output_base.value;
+        if (output_base == base.hexadecimal) {
+            return decimal_to_hexadecimal(input);
+        } else {
+            StringBuilder b = new StringBuilder();
+            while (decimal > 0) {
+                int bit = decimal % output_base.value;
+                b.append((char) ('0' + bit));
+                decimal /= output_base.value;
+            }
+            return b.reverse().toString();
         }
-        return b.reverse().toString();
     }
 
     /**
@@ -56,5 +60,25 @@ public class base_conversion {
         }
         System.out.println(decimal);
         return decimal; 
+    }
+
+    /**
+     * converts decimal into hexadecimal
+     * @param decimal input decimal
+     * @return output hexadecimal
+     */
+    public static String decimal_to_hexadecimal(int decimal) {
+        StringBuilder b = new StringBuilder();
+        int temp = decimal;
+        while (temp > 0) {
+            int remainder = temp % 16;
+            if (remainder < 10) {
+                b.append((char)(remainder + 48));
+            } else {
+                b.append((char)(remainder + 55));
+            }
+            temp /= 16;
+        }
+        return b.reverse().toString();
     }
 }
