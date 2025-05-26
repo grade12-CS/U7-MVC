@@ -6,6 +6,7 @@ package org.co;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,7 +15,11 @@ import javax.swing.JPanel;
 
 import org.co.components.base_buttons;
 import org.co.components.dave_textfield;
+import org.co.utils.base_conversion;
 
+/**
+ * main app
+ */
 public class App extends JFrame {
     private final JLabel label_title;
     private final JButton btn_calc;
@@ -22,6 +27,9 @@ public class App extends JFrame {
     private final dave_textfield txt_input, txt_output;
     private final JPanel panel = new JPanel();
 
+    /**
+     * initializes components and do basic setups
+     */
     public App() {
         setVisible(true);
         setPreferredSize(new Dimension(400, 500));
@@ -33,6 +41,14 @@ public class App extends JFrame {
         btns_input_base = new base_buttons("Input Number Base");
         btns_output_base = new base_buttons("Output Number Base");
         btn_calc = new JButton("Calculate");
+        btn_calc.addActionListener((ActionEvent e) -> {
+            if (txt_input.get_text().isBlank()) {
+                return;
+            }
+            txt_output.reset(); 
+            String output = calculate_output();
+            txt_output.set_text(output);
+        });
         panel.add(label_title);
         panel.add(txt_input);
         panel.add(btns_input_base);
@@ -43,8 +59,23 @@ public class App extends JFrame {
         pack();
     }
 
+    /**
+     * converts input into a desired base
+     * @return
+     */
+    private String calculate_output() {
+        var input_base = btns_input_base.selected_base;
+        var output_base = btns_output_base.selected_base;
+        int input = (int) txt_input.get_value();
+        return base_conversion.convert_base(input, input_base, output_base);
+    }
+
+    /**
+     * Tests app build
+     * @return
+     */
     public String getGreeting() {
-        return "Hello World!";
+        return "App build is successful.";
     }
 
     public static void main(String[] args) {
